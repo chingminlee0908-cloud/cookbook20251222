@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>食譜管家 | Morandi Neumorphism</title>
+    <title>食譜管家 | Morandi Neumorphism Pro</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -16,13 +16,13 @@
             --text-secondary: #8C8380;
             --accent-pink: #D48A96;
             --danger: #C47070;
+            --success: #789c79; /* 新增：編輯模式提示色 */
 
             --neu-light: #FFFFFF;
             --neu-dark: #D3C6BC;
 
-            /* 陰影設定：新增 Hover 狀態 */
             --shadow-flat: 10px 10px 20px var(--neu-dark), -10px -10px 20px var(--neu-light);
-            --shadow-hover: 14px 14px 28px var(--neu-dark), -14px -14px 28px var(--neu-light); /* 懸浮時陰影更擴散 */
+            --shadow-hover: 14px 14px 28px var(--neu-dark), -14px -14px 28px var(--neu-light);
             --shadow-pressed: inset 6px 6px 12px var(--neu-dark), inset -6px -6px 12px var(--neu-light);
             --shadow-shallow: 5px 5px 12px var(--neu-dark), -5px -5px 12px var(--neu-light);
 
@@ -35,12 +35,9 @@
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; outline: none; user-select: none; }
         
         body { 
-            margin: 0; 
-            font-family: var(--font-main);
-            background-color: var(--bg-morandi);
-            color: var(--text-primary);
-            padding-bottom: 130px; 
-            line-height: 1.7;
+            margin: 0; font-family: var(--font-main);
+            background-color: var(--bg-morandi); color: var(--text-primary);
+            padding-bottom: 130px; line-height: 1.7;
         }
 
         h1, h2, h3 { font-weight: 700; color: var(--text-primary); letter-spacing: 0.02em; }
@@ -50,44 +47,26 @@
         .container { max-width: 700px; margin: 0 auto; padding: 30px 24px; }
 
         header { 
-            background: var(--bg-morandi);
-            box-shadow: var(--shadow-shallow);
-            padding: 16px 24px; 
-            position: sticky; top: 0; z-index: 100; 
+            background: var(--bg-morandi); box-shadow: var(--shadow-shallow);
+            padding: 16px 24px; position: sticky; top: 0; z-index: 100; 
             display: flex; justify-content: center; align-items: center; 
-            border-bottom-left-radius: var(--radius-xl);
-            border-bottom-right-radius: var(--radius-xl);
+            border-bottom-left-radius: var(--radius-xl); border-bottom-right-radius: var(--radius-xl);
         }
         h1 { margin: 0; font-size: 1.4rem; color: var(--accent-pink); font-weight: 800; }
 
         h2 { font-size: 1.5rem; margin: 32px 0 24px; position: relative; display: inline-block; }
         h2::after { content: ''; display: block; width: 30px; height: 4px; background: var(--accent-pink); border-radius: var(--radius-pill); margin-top: 6px; opacity: 0.7; }
 
-        /* --- 4. Cards (Hover Effect Added) --- */
+        /* --- 4. Cards --- */
         .card { 
-            background: var(--bg-morandi);
-            border-radius: var(--radius-xl); 
-            padding: 24px; 
-            margin-bottom: 28px; 
-            box-shadow: var(--shadow-flat);
-            border: none;
-            display: flex; align-items: center; gap: 20px; 
-            cursor: pointer; 
-            /* 增加過渡動畫讓特效更滑順 */
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-            position: relative; overflow: hidden; /* For Ripple */
+            background: var(--bg-morandi); border-radius: var(--radius-xl); 
+            padding: 24px; margin-bottom: 28px; box-shadow: var(--shadow-flat);
+            border: none; display: flex; align-items: center; gap: 20px; 
+            cursor: pointer; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            position: relative; overflow: hidden;
         }
-
-        /* 懸浮特效：輕微上浮 + 陰影擴散 */
-        .card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-hover);
-        }
-
-        .card:active {
-            box-shadow: var(--shadow-pressed);
-            transform: scale(0.98) translateY(0); /* 按下時回到原位並縮小 */
-        }
+        .card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
+        .card:active { box-shadow: var(--shadow-pressed); transform: scale(0.98) translateY(0); }
 
         .card-img { 
             width: 72px; height: 72px; border-radius: 50%; object-fit: cover; 
@@ -103,48 +82,37 @@
             border: none; border-radius: var(--radius-pill);
             font-family: var(--font-main); font-size: 1rem; 
             background: var(--bg-morandi); color: var(--text-primary);
-            box-shadow: var(--shadow-pressed);
-            transition: all 0.2s;
+            box-shadow: var(--shadow-pressed); transition: all 0.2s;
         }
         textarea { border-radius: var(--radius-xl); }
         input:focus, select:focus, textarea:focus { color: var(--accent-pink); box-shadow: inset 4px 4px 8px var(--neu-dark), inset -4px -4px 8px var(--neu-light); }
         label { display: block; margin-bottom: 10px; font-size: 0.9rem; color: var(--accent-pink); font-weight: 700; margin-left: 16px; }
 
-        /* --- 6. Buttons (Enhanced Interaction) --- */
+        /* --- 6. Buttons --- */
         .btn { 
             padding: 14px 28px; border: none; border-radius: var(--radius-pill); 
             cursor: pointer; font-family: var(--font-main); font-size: 1rem; font-weight: 700;
             display: inline-flex; align-items: center; justify-content: center; gap: 8px; 
             background: var(--bg-morandi); color: var(--text-primary);
-            box-shadow: var(--shadow-flat);
-            
-            /* 關鍵：讓 Hover 平滑 */
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-            position: relative; overflow: hidden; /* For Ripple */
+            box-shadow: var(--shadow-flat); transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            position: relative; overflow: hidden;
         }
-
-        /* 懸浮特效：變亮、上浮 */
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-hover);
-            filter: brightness(1.02); /* 微微變亮 */
-        }
-
-        /* 按下特效 */
-        .btn:active { 
-            box-shadow: var(--shadow-pressed); 
-            transform: scale(0.96) translateY(0); 
-            filter: brightness(0.98);
-        }
+        .btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-hover); filter: brightness(1.02); }
+        .btn:active { box-shadow: var(--shadow-pressed); transform: scale(0.96) translateY(0); filter: brightness(0.98); }
 
         .btn-primary { color: var(--accent-pink); font-weight: 800; }
         .btn-danger { color: var(--danger); }
         .btn-outline { box-shadow: var(--shadow-shallow); color: var(--text-secondary); }
         .btn-outline:active { box-shadow: var(--shadow-pressed); }
+        
+        /* 編輯模式按鈕樣式 */
+        .btn-edit-mode { color: var(--bg-morandi); background: var(--text-secondary); }
+        .btn-cancel { color: var(--text-secondary); font-size: 0.9rem; }
+
         .btn-block { width: 100%; display: flex; margin-bottom: 16px; }
         .btn-sm { padding: 10px 20px; font-size: 0.9rem; }
 
-        /* FAB (浮動按鈕) */
+        /* FAB */
         .fab { 
             position: fixed; bottom: 100px; right: 28px; 
             width: 60px; height: 60px; border-radius: 50%; 
@@ -153,35 +121,43 @@
             font-size: 1.8rem; font-weight: 300; 
             box-shadow: var(--shadow-flat); border: none; 
             cursor: pointer; z-index: 90; 
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-            overflow: hidden; /* For Ripple */
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); overflow: hidden;
         }
         .fab:hover { transform: translateY(-4px) rotate(90deg); box-shadow: var(--shadow-hover); }
         .fab:active { box-shadow: var(--shadow-pressed); transform: scale(0.9) rotate(90deg); }
 
-        /* --- 7. Ripple Effect Styles (水波紋) --- */
+        /* --- 7. Ripple Effect --- */
         .ripple {
-            position: absolute;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.6); /* 白色光圈 */
-            transform: scale(0);
-            animation: ripple-animation 0.6s linear;
-            pointer-events: none; /* 讓點擊穿透 */
+            position: absolute; border-radius: 50%; background: rgba(255, 255, 255, 0.6);
+            transform: scale(0); animation: ripple-animation 0.6s linear; pointer-events: none;
         }
+        .btn-primary .ripple, .fab .ripple { background: rgba(212, 138, 150, 0.3); }
+        @keyframes ripple-animation { to { transform: scale(4); opacity: 0; } }
+
+        /* --- 8. Category Chips (Horizontal Scroll) --- */
+        .category-scroll {
+            display: flex; gap: 12px; overflow-x: auto; padding: 4px 4px 20px 4px;
+            margin-bottom: 10px; -webkit-overflow-scrolling: touch;
+            /* Hide scrollbar */
+            scrollbar-width: none;
+        }
+        .category-scroll::-webkit-scrollbar { display: none; }
         
-        /* 針對 Primary 按鈕，水波紋改為粉色 */
-        .btn-primary .ripple, .fab .ripple {
-            background: rgba(212, 138, 150, 0.3); 
+        .cat-chip {
+            flex: 0 0 auto; padding: 8px 20px; border-radius: var(--radius-pill);
+            background: var(--bg-morandi); color: var(--text-secondary);
+            font-weight: 700; font-size: 0.9rem; cursor: pointer;
+            box-shadow: var(--shadow-shallow); transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+        .cat-chip:active { box-shadow: var(--shadow-pressed); }
+        .cat-chip.active {
+            color: var(--accent-pink);
+            box-shadow: var(--shadow-pressed);
+            border-color: rgba(212, 138, 150, 0.1);
         }
 
-        @keyframes ripple-animation {
-            to {
-                transform: scale(4);
-                opacity: 0;
-            }
-        }
-
-        /* --- 8. Tables & Detail --- */
+        /* --- 9. Layout Details --- */
         .table-container { 
             background: var(--bg-morandi); border-radius: var(--radius-xl);
             box-shadow: var(--shadow-flat); padding: 12px; margin-bottom: 28px; overflow: hidden;
@@ -210,7 +186,7 @@
             margin: 24px 20px; box-shadow: var(--shadow-pressed);
         }
 
-        /* --- 9. Navigation --- */
+        /* --- 10. Navigation --- */
         nav { 
             position: fixed; bottom: 20px; left: 20px; right: 20px; width: auto;
             background: var(--bg-morandi); border-radius: var(--radius-pill);
@@ -221,32 +197,19 @@
             background: none; border: none; font-size: 0.8rem; color: var(--text-secondary); 
             display: flex; flex-direction: column; align-items: center; cursor: pointer; 
             transition: all 0.3s; padding: 6px 20px; border-radius: var(--radius-pill);
-            position: relative; overflow: hidden; /* For Ripple */
+            position: relative; overflow: hidden;
         }
         nav button.active { color: var(--accent-pink); box-shadow: var(--shadow-pressed); }
-        nav button:hover { color: var(--accent-pink); }
         nav button svg { width: 20px; height: 20px; margin-bottom: 4px; fill: currentColor; }
 
-        /* --- 10. Utilities --- */
-        .empty-state { 
-            text-align: center; padding: 60px 20px; color: var(--text-secondary);
-            box-shadow: var(--shadow-pressed); border-radius: var(--radius-xl);
-        }
+        /* --- 11. Utilities --- */
+        .empty-state { text-align: center; padding: 60px 20px; color: var(--text-secondary); box-shadow: var(--shadow-pressed); border-radius: var(--radius-xl); }
         .view { display: none; animation: fadeIn 0.4s ease-out; }
         .view.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        .badge { 
-            background: var(--bg-morandi); color: var(--accent-pink); 
-            padding: 8px 16px; border-radius: var(--radius-pill);
-            font-size: 0.9rem; font-weight: 700; box-shadow: var(--shadow-pressed);
-        }
-
-        #toast { 
-            visibility: hidden; min-width: 260px; background-color: var(--bg-morandi); 
-            color: var(--accent-pink); text-align: center; border-radius: var(--radius-pill); 
-            padding: 18px 28px; position: fixed; z-index: 200; left: 50%; bottom: 100px; 
-            transform: translateX(-50%); font-weight: 700; box-shadow: var(--shadow-flat);
-        }
+        .badge { background: var(--bg-morandi); color: var(--accent-pink); padding: 8px 16px; border-radius: var(--radius-pill); font-size: 0.9rem; font-weight: 700; box-shadow: var(--shadow-pressed); }
+        
+        #toast { visibility: hidden; min-width: 260px; background-color: var(--bg-morandi); color: var(--accent-pink); text-align: center; border-radius: var(--radius-pill); padding: 18px 28px; position: fixed; z-index: 200; left: 50%; bottom: 100px; transform: translateX(-50%); font-weight: 700; box-shadow: var(--shadow-flat); }
         #toast.show { visibility: visible; animation: fadein 0.5s, fadeout 0.5s 2.5s; }
         @keyframes fadein { from {bottom: 80px; opacity: 0;} to {bottom: 100px; opacity: 1;} }
         @keyframes fadeout { from {bottom: 100px; opacity: 1;} to {bottom: 80px; opacity: 0;} }
@@ -254,26 +217,41 @@
         .hidden { display: none !important; }
         .text-right { text-align: right; }
         
+        /* Settings Item */
         .settings-item {
             background: var(--bg-morandi); box-shadow: var(--shadow-shallow);
             border-radius: var(--radius-xl); padding: 16px 24px; margin-bottom: 16px;
             display: flex; justify-content: space-between; align-items: center;
+            cursor: pointer; transition: all 0.2s;
         }
+        /* 可點擊編輯的視覺提示 */
+        .settings-item.editable:active { box-shadow: var(--shadow-pressed); transform: scale(0.98); }
+        
         .ingredient-row { display: grid; grid-template-columns: 2fr 1fr 44px; gap: 16px; align-items: center; margin-bottom: 16px; }
-        .ingredient-row .btn-danger {
-            padding: 0; height: 44px; width: 44px; border-radius: 50%; display: flex;
-            align-items: center; justify-content: center; font-size: 1.4rem; box-shadow: var(--shadow-shallow);
-        }
+        .ingredient-row .btn-danger { padding: 0; height: 44px; width: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; box-shadow: var(--shadow-shallow); }
         .ingredient-row .btn-danger:active { box-shadow: var(--shadow-pressed); }
 
         #search-container input { padding-left: 52px; }
-        #search-container::before {
-            content: '🔍'; position: absolute; left: 22px; top: 50%; transform: translateY(-55%);
-            color: var(--accent-pink); z-index: 2; font-size: 1.2rem;
+        #search-container::before { content: '🔍'; position: absolute; left: 22px; top: 50%; transform: translateY(-55%); color: var(--accent-pink); z-index: 2; font-size: 1.2rem; }
+        
+        .settings-section-title { margin-top: 40px; margin-bottom: 20px; padding-left: 10px; border-left: 4px solid var(--accent-pink); font-size: 1.2rem; }
+        
+        /* 入口區塊樣式 */
+        .entry-block {
+            margin-top: 10px; padding: 24px; 
+            border: 2px dashed rgba(140, 131, 128, 0.2); border-radius: var(--radius-xl);
+            text-align: center;
         }
-        .settings-section-title {
-            margin-top: 40px; margin-bottom: 20px; padding-left: 10px;
-            border-left: 4px solid var(--accent-pink); font-size: 1.2rem;
+        
+        /* 編輯中狀態的視覺區隔 */
+        .editing-mode-box {
+            border: 2px solid var(--accent-pink);
+            position: relative;
+        }
+        .editing-mode-box::after {
+            content: '編輯中'; position: absolute; top: -12px; left: 24px;
+            background: var(--accent-pink); color: white; padding: 2px 8px;
+            border-radius: 10px; font-size: 0.8rem; font-weight: bold;
         }
     </style>
 </head>
@@ -286,6 +264,10 @@
 <div class="container">
 
     <div id="view-list" class="view active">
+        <div class="category-scroll" id="category-filter-list">
+            <div class="cat-chip active ripple-btn" onclick="app.filterCategory('all', this)">全部</div>
+            </div>
+
         <div id="search-container" style="position:relative; margin-bottom: 24px;">
             <input type="text" id="search-input" placeholder="搜尋您的食譜..." oninput="app.handleSearch()">
         </div>
@@ -298,7 +280,9 @@
             <img id="detail-image" class="detail-img" src="" alt="Recipe Image">
         </div>
         <div class="detail-info">
-            <h2 id="detail-title" style="margin-top:0; border:none; text-align:center; font-size: 1.8rem; margin-bottom: 16px;">食譜名稱</h2>
+            <h2 id="detail-title" style="margin-top:0; border:none; text-align:center; font-size: 1.8rem; margin-bottom: 8px;">食譜名稱</h2>
+            <div id="detail-category-badge" style="text-align: center; margin-bottom: 16px; color: var(--accent-pink); font-weight: 700;">分類名稱</div>
+            
             <div style="display:flex; justify-content:center; gap: 10px; margin-bottom: 24px;">
                 <span class="badge">基準: <span id="detail-base-servings"></span> 人份</span>
             </div>
@@ -341,8 +325,15 @@
         <h2 id="edit-view-title">新增食譜</h2>
         <label>食譜名稱</label>
         <input type="text" id="edit-name" placeholder="例如：草莓鮮奶油蛋糕">
+        
+        <label>分類</label>
+        <select id="edit-category">
+            <option value="default">未分類</option>
+        </select>
+
         <label>基準份數 (人)</label>
         <input type="number" id="edit-base-servings" value="4" min="1">
+        
         <label>封面圖片 (選填)</label>
         <div style="position:relative; overflow:hidden; margin-bottom: 28px;">
             <button class="btn btn-outline btn-block" style="pointer-events: none; color: var(--text-secondary);">選擇圖片...</button>
@@ -354,6 +345,7 @@
             <br>
             <button class="btn btn-sm btn-danger ripple-btn" onclick="app.clearImage()" style="margin-top:20px;">移除圖片</button>
         </div>
+        
         <div style="display:flex; justify-content: space-between; align-items: center; margin-top: 36px; margin-bottom: 24px;">
             <h3 style="margin:0;">所需食材</h3>
             <button class="btn btn-sm btn-outline ripple-btn" onclick="app.addIngredientRow()" style="color: var(--accent-pink);">＋ 加入</button>
@@ -370,14 +362,16 @@
         <div style="display:flex; gap:16px; margin-bottom:28px; align-items: flex-end;">
             <div style="flex:1">
                 <label>新單位名稱</label>
-                <input type="text" id="setting-unit-name" placeholder="例如：盒、片" style="margin-bottom:0;">
+                <input type="text" id="setting-unit-name" placeholder="例如：盒" style="margin-bottom:0;">
             </div>
             <button class="btn btn-primary ripple-btn" onclick="app.addUnit()" style="height: 58px;">新增</button>
         </div>
         <div id="settings-unit-list" style="margin-bottom: 40px;"></div>
 
         <div class="settings-section-title">食材市價庫</div>
-        <div style="background: var(--bg-morandi); padding: 28px; box-shadow: var(--shadow-pressed); border-radius: var(--radius-xl); margin-bottom:36px;">
+        <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 10px;">點擊下方列表項目可進行編輯</p>
+        
+        <div id="ingredient-form-card" style="background: var(--bg-morandi); padding: 28px; box-shadow: var(--shadow-pressed); border-radius: var(--radius-xl); margin-bottom:36px;">
             <label>食材名稱</label>
             <input type="text" id="setting-ing-name" placeholder="例如：有機草莓">
             <div style="display:flex; gap:16px; margin-bottom: 10px;">
@@ -390,14 +384,34 @@
                     <select id="setting-ing-unit" style="margin-bottom:20px;"></select>
                 </div>
             </div>
-            <button class="btn btn-primary btn-block ripple-btn" onclick="app.addIngredient()">更新/新增食材</button>
+            <div style="display: flex; gap: 10px;">
+                <button id="btn-cancel-ing-edit" class="btn btn-outline ripple-btn hidden" style="flex:1;" onclick="app.cancelEditIngredient()">取消</button>
+                <button id="btn-save-ing" class="btn btn-primary ripple-btn" style="flex:1;" onclick="app.saveIngredient()">新增食材</button>
+            </div>
         </div>
         <div id="settings-ing-list"></div>
 
-        <div style="margin-top: 60px; padding-top: 20px; border-top: 2px dashed rgba(212,138,150,0.2);">
-            <div class="settings-section-title" style="border-color: var(--text-secondary); color: var(--text-secondary);">資料管理</div>
-            <button class="btn btn-outline btn-block ripple-btn" onclick="app.navTo('io')">前往 備份與還原</button>
+        <div style="margin-top: 60px;">
+            <div class="settings-section-title" style="border-color: var(--text-secondary); color: var(--text-secondary);">進階管理</div>
+            
+            <div class="entry-block">
+                <button class="btn btn-outline btn-block ripple-btn" onclick="app.navTo('categories')">📁 食譜分類管理</button>
+                <button class="btn btn-outline btn-block ripple-btn" onclick="app.navTo('io')" style="margin-bottom: 0;">💾 資料備份與還原</button>
+            </div>
         </div>
+    </div>
+
+    <div id="view-categories" class="view">
+        <h2>分類管理</h2>
+        <div style="display:flex; gap:16px; margin-bottom:28px; align-items: flex-end;">
+            <div style="flex:1">
+                <label>新分類名稱</label>
+                <input type="text" id="cat-manage-name" placeholder="例如：甜點、主餐" style="margin-bottom:0;">
+            </div>
+            <button class="btn btn-primary ripple-btn" onclick="app.addCategory()" style="height: 58px;">新增</button>
+        </div>
+        <div id="category-manage-list"></div>
+        <button class="btn btn-outline btn-block ripple-btn" onclick="app.navTo('settings')" style="margin-top: 40px;">返回設定</button>
     </div>
 
     <div id="view-io" class="view">
@@ -432,12 +446,13 @@
 <script>
 // --- Constants & State ---
 const CONSTANTS = {
-    STORE_KEY: 'recipe_app_v3_morandi',
+    STORE_KEY: 'recipe_app_v4_pro',
     IMG_PLACEHOLDER: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iI2QzYzZiYyI+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0iI2QzYzZiYyIvPjwvc3ZnPg=='
 };
 
 const defaultState = {
     units: [{ id: 'u1', name: 'g' }, { id: 'u2', name: 'ml' }, { id: 'u3', name: '個' }, { id: 'u4', name: '台斤' }],
+    categories: [{ id: 'c1', name: '主餐' }, { id: 'c2', name: '甜點' }], // 新增分類
     ingredients: [], 
     recipes: [] 
 };
@@ -445,6 +460,8 @@ const defaultState = {
 let appState = JSON.parse(JSON.stringify(defaultState));
 let editingRecipeId = null;
 let currentDetailRecipeId = null;
+let editingIngredientId = null; // 用於追蹤正在編輯的食材
+let currentCategoryFilter = 'all'; // 當前過濾器
 
 const uuid = () => Date.now().toString(36) + Math.random().toString(36).substr(2);
 const getEl = (id) => document.getElementById(id);
@@ -461,7 +478,9 @@ const storage = {
             try {
                 const parsed = JSON.parse(data);
                 appState = { ...defaultState, ...parsed }; 
+                // Migration checks
                 if(!appState.units) appState.units = defaultState.units;
+                if(!appState.categories) appState.categories = defaultState.categories;
                 if(!appState.ingredients) appState.ingredients = [];
                 if(!appState.recipes) appState.recipes = [];
             } catch (e) { appState = JSON.parse(JSON.stringify(defaultState)); }
@@ -498,36 +517,26 @@ const resizeImage = (file, maxWidth = 500) => {
     });
 };
 
-// --- Ripple Effect Logic ---
 function createRipple(event) {
     const button = event.currentTarget;
     const circle = document.createElement("span");
     const diameter = Math.max(button.clientWidth, button.clientHeight);
     const radius = diameter / 2;
-
-    // 如果是滑鼠點擊，計算相對於按鈕的位置；如果是程式觸發(如鍵盤)，則置中
     const rect = button.getBoundingClientRect();
     const x = event.clientX ? (event.clientX - rect.left) : radius;
     const y = event.clientY ? (event.clientY - rect.top) : radius;
-
     circle.style.width = circle.style.height = `${diameter}px`;
     circle.style.left = `${x - radius}px`;
     circle.style.top = `${y - radius}px`;
     circle.classList.add("ripple");
-
     const ripple = button.getElementsByClassName("ripple")[0];
-    if (ripple) {
-        ripple.remove();
-    }
-
+    if (ripple) ripple.remove();
     button.appendChild(circle);
 }
 
-// Attach listeners to buttons (delegation or direct)
 function attachRippleEffect() {
     const buttons = document.querySelectorAll('.ripple-btn, .card, nav button');
     buttons.forEach(btn => {
-        // Prevent multiple listeners
         btn.removeEventListener('click', createRipple);
         btn.addEventListener('click', createRipple);
     });
@@ -548,50 +557,132 @@ const app = {
         if(target) target.classList.add('active');
 
         if (viewName === 'list' || viewName === 'detail') getEl('nav-list').classList.add('active');
-        if (viewName === 'settings' || viewName === 'io') getEl('nav-settings').classList.add('active');
+        // settings, categories, io 都算在設定的分頁下
+        if (['settings', 'categories', 'io'].includes(viewName)) getEl('nav-settings').classList.add('active');
         
         if (viewName === 'list') app.renderRecipeList();
         if (viewName === 'settings') app.renderSettings();
+        if (viewName === 'categories') app.renderCategories();
         if (viewName === 'edit' && editingRecipeId === null) app.initEditForm(); 
         
-        // Re-attach ripple effects to new elements
         setTimeout(attachRippleEffect, 100);
         window.scrollTo(0,0);
     },
 
+    // --- Category Management ---
+    renderCategories: () => {
+        const list = getEl('category-manage-list');
+        list.innerHTML = '';
+        appState.categories.forEach(c => {
+            const div = document.createElement('div');
+            div.className = 'settings-item';
+            div.innerHTML = `
+                <span style="font-weight:700; color:var(--accent-pink);">${c.name}</span>
+                <button class="btn btn-sm btn-danger ripple-btn" onclick="app.deleteCategory('${c.id}')">刪除</button>
+            `;
+            list.appendChild(div);
+        });
+        attachRippleEffect();
+    },
+
+    addCategory: () => {
+        const name = getEl('cat-manage-name').value.trim();
+        if (!name) return;
+        appState.categories.push({ id: uuid(), name });
+        getEl('cat-manage-name').value = '';
+        storage.save();
+        app.renderCategories();
+    },
+
+    deleteCategory: (id) => {
+        // 檢查是否有食譜使用此分類
+        const isUsed = appState.recipes.some(r => r.categoryId === id);
+        if (isUsed) { alert('無法刪除：有食譜正在使用此分類。'); return; }
+        if (confirm('確定刪除此分類？')) {
+            appState.categories = appState.categories.filter(c => c.id !== id);
+            storage.save();
+            app.renderCategories();
+        }
+    },
+
+    filterCategory: (catId, btn) => {
+        currentCategoryFilter = catId;
+        // Update visual state
+        document.querySelectorAll('.cat-chip').forEach(el => el.classList.remove('active'));
+        btn.classList.add('active');
+        app.renderRecipeList(getEl('search-input').value);
+    },
+
+    // --- List & Search ---
     handleSearch: () => { app.renderRecipeList(getEl('search-input').value); },
 
     renderRecipeList: (keyword = '') => {
+        // 1. Render Category Filter Chips
+        const catList = getEl('category-filter-list');
+        // 保留「全部」按鈕，重新生成後面的
+        let html = `<div class="cat-chip ${currentCategoryFilter === 'all' ? 'active' : ''} ripple-btn" onclick="app.filterCategory('all', this)">全部</div>`;
+        html += `<div class="cat-chip ${currentCategoryFilter === 'uncategorized' ? 'active' : ''} ripple-btn" onclick="app.filterCategory('uncategorized', this)">未分類</div>`;
+        appState.categories.forEach(c => {
+            html += `<div class="cat-chip ${currentCategoryFilter === c.id ? 'active' : ''} ripple-btn" onclick="app.filterCategory('${c.id}', this)">${c.name}</div>`;
+        });
+        catList.innerHTML = html;
+
+        // 2. Render Recipes
         const list = getEl('recipe-list-container');
         list.innerHTML = '';
-        const filtered = appState.recipes.filter(r => r.name.toLowerCase().includes(keyword.toLowerCase()));
+        
+        let filtered = appState.recipes.filter(r => r.name.toLowerCase().includes(keyword.toLowerCase()));
+
+        // Apply Category Filter
+        if (currentCategoryFilter !== 'all') {
+            if (currentCategoryFilter === 'uncategorized') {
+                filtered = filtered.filter(r => !r.categoryId || r.categoryId === 'default');
+            } else {
+                filtered = filtered.filter(r => r.categoryId === currentCategoryFilter);
+            }
+        }
         
         if (filtered.length === 0) {
-            list.innerHTML = `<div class="empty-state">${keyword ? '找不到符合的食譜。' : '尚無食譜，請點擊 ＋ 新增。'}</div>`;
+            list.innerHTML = `<div class="empty-state">${keyword ? '找不到符合的食譜。' : '尚無此分類食譜。'}</div>`;
             return;
         }
 
         filtered.forEach(r => {
             const div = document.createElement('div');
-            div.className = 'card'; // Card also has ripple
+            div.className = 'card'; 
             div.onclick = (e) => { createRipple(e); setTimeout(() => app.openDetail(r.id), 200); };
+            
+            // 查找分類名稱
+            const cat = appState.categories.find(c => c.id === r.categoryId);
+            const catName = cat ? cat.name : '';
+
             div.innerHTML = `
                 <img src="${r.image || CONSTANTS.IMG_PLACEHOLDER}" class="card-img" loading="lazy">
                 <div class="card-content">
                     <div class="card-title">${r.name}</div>
-                    <div class="card-subtitle">份量: ${r.baseServings} 人 • 食材: ${r.ingredients.length} 項</div>
+                    <div class="card-subtitle">
+                        ${catName ? `<span style="color:var(--accent-pink); margin-right:5px;">[${catName}]</span>` : ''} 
+                        ${r.baseServings}人 • ${r.ingredients.length}食材
+                    </div>
                 </div>
                 <div style="color:var(--accent-pink); font-size:1.5rem; font-weight:800;">›</div>
             `;
             list.appendChild(div);
         });
+        attachRippleEffect();
     },
 
+    // --- Detail ---
     openDetail: (id) => {
         currentDetailRecipeId = id;
         const r = appState.recipes.find(x => x.id === id);
         if (!r) return;
         getEl('detail-title').textContent = r.name;
+        
+        const cat = appState.categories.find(c => c.id === r.categoryId);
+        getEl('detail-category-badge').textContent = cat ? cat.name : '';
+        getEl('detail-category-badge').style.display = cat ? 'block' : 'none';
+
         getEl('detail-base-servings').textContent = r.baseServings;
         getEl('detail-image').src = r.image || CONSTANTS.IMG_PLACEHOLDER;
         getEl('target-servings').value = r.baseServings; 
@@ -638,6 +729,7 @@ const app = {
         }
     },
 
+    // --- Edit/Create Recipe ---
     editCurrentRecipe: () => {
         editingRecipeId = currentDetailRecipeId;
         app.initEditForm();
@@ -647,12 +739,22 @@ const app = {
     initEditForm: () => {
         const title = getEl('edit-view-title');
         const list = getEl('edit-ingredients-list');
+        const catSelect = getEl('edit-category');
+        
+        // Populate Categories Select
+        catSelect.innerHTML = '<option value="default">未分類</option>';
+        appState.categories.forEach(c => {
+            catSelect.innerHTML += `<option value="${c.id}">${c.name}</option>`;
+        });
+
         list.innerHTML = '';
         if (editingRecipeId) {
             const r = appState.recipes.find(x => x.id === editingRecipeId);
             title.textContent = "編輯食譜";
             getEl('edit-name').value = r.name;
             getEl('edit-base-servings').value = r.baseServings;
+            catSelect.value = r.categoryId || 'default';
+
             if (r.image) {
                 getEl('edit-image-preview').src = r.image;
                 getEl('edit-image-preview-container').classList.remove('hidden');
@@ -662,6 +764,7 @@ const app = {
             title.textContent = "新增食譜";
             getEl('edit-name').value = '';
             getEl('edit-base-servings').value = 4;
+            catSelect.value = 'default';
             app.clearImage();
             app.addIngredientRow(); 
         }
@@ -684,7 +787,7 @@ const app = {
             <button class="btn btn-danger ripple-btn" onclick="this.parentElement.remove()">×</button>
         `;
         container.appendChild(div);
-        attachRippleEffect(); // re-attach for new button
+        attachRippleEffect();
     },
 
     handleImageUpload: async (input) => {
@@ -706,6 +809,8 @@ const app = {
     saveRecipe: () => {
         const name = getEl('edit-name').value.trim();
         const baseServings = parseFloat(getEl('edit-base-servings').value);
+        const categoryId = getEl('edit-category').value;
+
         if (!name || !baseServings) { alert('請填寫食譜名稱與基準份數'); return; }
         const rows = document.querySelectorAll('.ingredient-row');
         const ingredients = [];
@@ -716,7 +821,15 @@ const app = {
         }
         const imgData = getEl('edit-image-preview').getAttribute('src');
         const finalImg = (imgData && imgData.startsWith('data:')) ? imgData : null;
-        const newRecipe = { id: editingRecipeId || uuid(), name, baseServings, image: finalImg, ingredients };
+        
+        const newRecipe = { 
+            id: editingRecipeId || uuid(), 
+            name, 
+            baseServings, 
+            categoryId, // Save Category
+            image: finalImg, 
+            ingredients 
+        };
         if (editingRecipeId) {
             const idx = appState.recipes.findIndex(r => r.id === editingRecipeId);
             appState.recipes[idx] = newRecipe;
@@ -727,6 +840,7 @@ const app = {
         app.navTo('list');
     },
 
+    // --- Settings: Ingredient Editing Logic ---
     renderSettings: () => {
         const unitSelect = getEl('setting-ing-unit');
         unitSelect.innerHTML = '';
@@ -747,7 +861,11 @@ const app = {
             const u = appState.units.find(unit => unit.id === i.unitId);
             const uName = u ? u.name : '?';
             const div = document.createElement('div');
-            div.className = 'settings-item';
+            div.className = 'settings-item editable'; // 加入 editable class 提示可點擊
+            div.onclick = (e) => { 
+                // 防止點擊刪除按鈕時觸發編輯
+                if(e.target.tagName !== 'BUTTON') app.selectIngredientForEdit(i.id); 
+            };
             div.innerHTML = `
                 <div style="flex:1">
                     <strong style="font-size:1.1rem;">${i.name}</strong><br>
@@ -759,6 +877,66 @@ const app = {
         });
         attachRippleEffect();
     },
+
+    selectIngredientForEdit: (id) => {
+        const ing = appState.ingredients.find(i => i.id === id);
+        if (!ing) return;
+
+        editingIngredientId = id;
+        getEl('setting-ing-name').value = ing.name;
+        getEl('setting-ing-price').value = ing.price;
+        getEl('setting-ing-unit').value = ing.unitId;
+
+        // Change UI State
+        getEl('btn-save-ing').textContent = '更新食材';
+        getEl('btn-save-ing').classList.remove('btn-primary');
+        getEl('btn-save-ing').classList.add('btn-edit-mode'); // 特殊顏色提示
+        getEl('btn-cancel-ing-edit').classList.remove('hidden');
+        getEl('ingredient-form-card').classList.add('editing-mode-box');
+        
+        // Scroll to form
+        getEl('ingredient-form-card').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    },
+
+    cancelEditIngredient: () => {
+        editingIngredientId = null;
+        getEl('setting-ing-name').value = '';
+        getEl('setting-ing-price').value = '';
+        
+        // Reset UI State
+        getEl('btn-save-ing').textContent = '新增食材';
+        getEl('btn-save-ing').classList.add('btn-primary');
+        getEl('btn-save-ing').classList.remove('btn-edit-mode');
+        getEl('btn-cancel-ing-edit').classList.add('hidden');
+        getEl('ingredient-form-card').classList.remove('editing-mode-box');
+    },
+
+    saveIngredient: () => { // Renamed from addIngredient to cover both cases
+        const name = getEl('setting-ing-name').value.trim();
+        const price = parseFloat(getEl('setting-ing-price').value);
+        const unitId = getEl('setting-ing-unit').value;
+        if (!name || isNaN(price) || !unitId) { alert('請完整填寫資訊。'); return; }
+
+        if (editingIngredientId) {
+            // Update
+            const idx = appState.ingredients.findIndex(i => i.id === editingIngredientId);
+            if (idx !== -1) {
+                appState.ingredients[idx] = { id: editingIngredientId, name, price, unitId };
+                toast('食材已更新');
+            }
+        } else {
+            // Create
+            appState.ingredients.push({ id: uuid(), name, price, unitId });
+            toast('市價表已更新');
+        }
+        
+        storage.save();
+        app.cancelEditIngredient(); // Reset form
+        app.renderSettings();
+    },
+    
+    // Alias for backward compatibility if button onclick wasn't updated
+    addIngredient: () => app.saveIngredient(),
 
     addUnit: () => {
         const name = getEl('setting-unit-name').value.trim();
@@ -779,20 +957,10 @@ const app = {
         }
     },
 
-    addIngredient: () => {
-        const name = getEl('setting-ing-name').value.trim();
-        const price = parseFloat(getEl('setting-ing-price').value);
-        const unitId = getEl('setting-ing-unit').value;
-        if (!name || isNaN(price) || !unitId) { alert('請完整填寫資訊。'); return; }
-        appState.ingredients.push({ id: uuid(), name, price, unitId });
-        getEl('setting-ing-name').value = '';
-        getEl('setting-ing-price').value = '';
-        storage.save();
-        app.renderSettings();
-        toast('市價表已更新');
-    },
-
     deleteIngredient: (id) => {
+        // Stop edit mode if deleting the item being edited
+        if (editingIngredientId === id) app.cancelEditIngredient();
+
         let usedIn = [];
         appState.recipes.forEach(r => { if (r.ingredients.some(ri => ri.ingredientId === id)) usedIn.push(r.name); });
         if (usedIn.length > 0) { alert(`無法刪除：以下食譜正在使用此食材\n${usedIn.join(', ')}`); return; }
@@ -823,7 +991,6 @@ const app = {
 
 document.addEventListener('DOMContentLoaded', () => {
     app.init();
-    // Start listening for ripple
     attachRippleEffect();
 });
 </script>
